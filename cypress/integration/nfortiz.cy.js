@@ -5,7 +5,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 });
 
 beforeEach(()=>{
-    cy.visit('http://localhost:8080/ghost')
+    cy.visit('http://localhost:8080/ghost/#/signin')
     cy.wait("@login");
     cy.get('a[data-test-nav="pages"]').click()
 })
