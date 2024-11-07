@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "k:gen": "kraken-node gen",
-    "k:run": "kraken-node run",
+    "k:run": "./node_modules/kraken-node/bin/kraken-node run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
