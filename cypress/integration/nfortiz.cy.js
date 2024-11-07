@@ -16,39 +16,140 @@ it("Create new page", () => {
     cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
     cy.location("hash").should("equal", "#/editor/page"); // check location
 
-    cy.get('textarea[data-test-editor-title-input=""]').type("A title")
+    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
+
+    // Set content
+    cy.get('textarea[data-test-editor-title-input=""]').type("A New Page by Cypress")
     cy.get('div[data-placeholder="Begin writing your post..."]').type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
 
-    cy.wait(500);
-    cy.location("hash").should("include", "#/editor/post/");
+    cy.wait("@createPage")
 
     cy.get('button[data-test-button="publish-flow"]').click(); // click en publicar
-    cy.get('div').contains('Publish').click()
 
     cy.wait(500)
     cy.get('div.epm-modal-container').within(() => {
-        cy.get('button[data-test-button="continue"]').contains('Publish').click()
+        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
+        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
     })
-    cy.wait(500)
-    cy.screenshot('Publicado')
 
+    cy.wait(500)
+    cy.screenshot('New Page')
 });
 
 it("Create empty page", () => {
-    cy.location("hash").should("equal", "#/pages");
-    cy.get('a[title="New post"]').click(); // Ecntra el crear publicacion
-    cy.location("hash").should("equal", "#/editor/post");
+    cy.visit(BASE_URL + 'ghost/#/pages/')
+    cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
+    cy.location("hash").should("equal", "#/editor/page"); // check location
 
-    cy.get("textarea.gh-editor-title").click(); // Click en el titulo
-    cy.get("div.koenig-editor__editor-wrapper").click();
+    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
 
-    cy.wait("@createPost");
-    cy.location("hash").should("include", "#/editor/post/");
+    // Set content
+    cy.get('textarea[data-test-editor-title-input=""]').type("A New Page by Cypress")
+    cy.get('div[data-placeholder="Begin writing your post..."]').type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
 
-    cy.get("div.gh-publishmenu").click(); // click en publicar
-    cy.get("button#ember96").click(); // Clic en publicar
-  });
+    cy.get('textarea[data-test-editor-title-input=""]').clear();
+    cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
 
+    cy.wait("@createPage")
+
+    cy.get('button[data-test-button="publish-flow"]').click(); // click en publicar
+
+    cy.wait(500)
+    cy.get('div.epm-modal-container').within(() => {
+        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
+        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+    })
+
+    cy.wait(500)
+    cy.screenshot('New Page')
+});
+
+it("Edit page", () => {
+    cy.visit(BASE_URL + 'ghost/#/pages/')
+    cy.screenshot('Before Edit');
+    cy.get('span.gh-post-list-cta.edit').click(); //Click on New Page
+    cy.location("hash").should("equal", "#/editor/page"); // check location
+
+    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
+
+    // Set content
+    cy.get('textarea[data-test-editor-title-input=""]').type("Edited Page")
+    cy.get('div[data-placeholder="Begin writing your post..."]').type(" It is unsafe to chain further commands that rely on the subject afte.")
+
+    cy.get('textarea[data-test-editor-title-input=""]').clear();
+    cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
+
+    cy.wait("@createPage")
+
+    cy.get('button[data-test-button="publish-flow"]').click(); // click en publicar
+
+    cy.wait(500)
+    cy.get('div.epm-modal-container').within(() => {
+        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
+        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+    })
+
+    cy.wait(500)
+    cy.screenshot('New Page')
+});
+
+it("Unpublish page", () => {
+    cy.visit(BASE_URL + 'ghost/#/pages/')
+    cy.screenshot('Before Edit');
+    cy.get('span.gh-post-list-cta.edit').click(); //Click on New Page
+    cy.location("hash").should("equal", "#/editor/page"); // check location
+
+    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
+
+    // Set content
+    cy.get('textarea[data-test-editor-title-input=""]').type("Edited Page")
+    cy.get('div[data-placeholder="Begin writing your post..."]').type(" It is unsafe to chain further commands that rely on the subject afte.")
+
+    cy.get('textarea[data-test-editor-title-input=""]').clear();
+    cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
+
+    cy.wait("@createPage")
+
+    cy.get('button[data-test-button="update-flow"]').click(); // click en unpublish
+
+    cy.wait(500)
+    cy.get('div.epm-modal-container').within(() => {
+        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
+        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+    })
+
+    cy.wait(500)
+    cy.screenshot('New Page')
+});
+
+
+it("Delete page", () => {
+    cy.visit(BASE_URL + 'ghost/#/pages/')
+    cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
+    cy.location("hash").should("equal", "#/editor/page"); // check location
+
+    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
+
+    // Set content
+    cy.get('textarea[data-test-editor-title-input=""]').type("A New Page by Cypress")
+    cy.get('div[data-placeholder="Begin writing your post..."]').type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
+
+    cy.get('textarea[data-test-editor-title-input=""]').clear();
+    cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
+
+    cy.wait("@createPage")
+
+    cy.get('button[data-test-button="publish-flow"]').click(); // click en publicar
+
+    cy.wait(500)
+    cy.get('div.epm-modal-container').within(() => {
+        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
+        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+    })
+
+    cy.wait(500)
+    cy.screenshot('New Page')
+});
 
 
   function createPage(title, content) {
