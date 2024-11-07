@@ -5,8 +5,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 });
 
 beforeEach(()=>{
-    cy.visit('http://localhost:8080/ghost/#/signin')
-    cy.visit("http://ghost:2368/ghost/#/signin");
+    cy.visit('http://localhost:8080/ghost/#/signin');
    cy.get('a[title="Dashboard"]').should('be.visible');
 });
 
