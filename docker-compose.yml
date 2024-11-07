@@ -9,7 +9,7 @@ services:
       - ghost
     environment:
       # pass base url to test pointing at the web application
-      - CYPRESS_baseUrl=http://ghost:2368
+      - CYPRESS_baseUrl=http://ghost:2368/ghost
     # share the current folder as volume to avoid copying
     working_dir: /e2e
     volumes:
