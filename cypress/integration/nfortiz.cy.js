@@ -6,9 +6,9 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 beforeEach(()=>{
     cy.visit('http://localhost:8080/ghost/#/signin')
-    cy.wait("@login");
-    cy.get('a[data-test-nav="pages"]').click()
-})
+    cy.visit("http://ghost:2368/ghost/#/signin");
+   cy.get('a[title="Dashboard"]').should('be.visible');
+});
 
 it("Create new post", () => {
     cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
