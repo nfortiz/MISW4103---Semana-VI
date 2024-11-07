@@ -23,4 +23,11 @@ it("Create new post", () => {
     cy.get("div.gh-publishmenu").click(); // click en publicar
     cy.get('div').contains('Publish').click()
 
+    cy.wait(500)
+    cy.get('.modal-content').within(() => {
+        cy.get('button').contains('Publish').click()
+    })
+    cy.wait(500)
+    cy.screenshot('Publicado')
+
 });
