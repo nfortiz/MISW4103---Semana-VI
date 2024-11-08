@@ -92,55 +92,36 @@ it("Edit page", () => {
 it("Unpublish page", () => {
     cy.visit(BASE_URL + '/ghost/#/pages/')
     cy.screenshot('Before Edit');
-    cy.get('span.gh-post-list-cta.edit').click(); //Click on New Page
+    cy.get('span.gh-post-list-cta.edit').click(); //Click on Edit first page
     cy.location("hash").should("equal", "#/editor/page"); // check location
 
-    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
 
-    // Set content
-    cy.get('textarea[data-test-editor-title-input=""]').type("Edited Page")
-    cy.get('div[data-placeholder="Begin writing your post..."]').type(" It is unsafe to chain further commands that rely on the subject afte.")
-
-    cy.get('textarea[data-test-editor-title-input=""]').clear();
-    cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
-
-    cy.wait("@createPage")
-
-    cy.get('button[data-test-button="update-flow"]').click(); // click en unpublish
+    cy.wait(500)
+    cy.get('button[data-test-button="update-flow"]').contains('Unpublish').first().click(); // click en unpublish
 
     cy.wait(500)
     cy.get('div.epm-modal-container').within(() => {
-        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
-        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+        cy.get('button[data-test-button="revert-to-draft"]').first().click() // click en continuar
     })
-
+    
     cy.wait(500)
-    cy.screenshot('New Page')
+    cy.get('div[data-test-editor-post-status=""]').contains('Draft');
+    cy.screenshot('Set to draft state');
 });
 
 
 it("Delete page", () => {
-    cy.visit(BASE_URL + 'ghost/#/pages/')
-    cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
+    cy.visit(BASE_URL + '/ghost/#/pages/')
+    cy.screenshot('Before Edit');
+    cy.get('span.gh-post-list-cta.edit').click(); //Click on Edit first page
     cy.location("hash").should("equal", "#/editor/page"); // check location
 
-    cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
-
-    // Set content
-    cy.get('textarea[data-test-editor-title-input=""]').type("A New Page by Cypress")
-    cy.get('div[data-placeholder="Begin writing your post..."]').type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
-
-    cy.get('textarea[data-test-editor-title-input=""]').clear();
-    cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
-
-    cy.wait("@createPage")
-
-    cy.get('button[data-test-button="publish-flow"]').click(); // click en publicar
+    cy.get('button.settings-menu-toggle').first().click(); // click en menu lateral
+    cy.get('button[data-test-button="delete-post"]').first().click(); // click on delete button
 
     cy.wait(500)
     cy.get('div.epm-modal-container').within(() => {
-        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
-        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+        cy.get('button[data-test-button="delete-post-confirm"]').contains('Delete').click() // click en delete
     })
 
     cy.wait(500)
