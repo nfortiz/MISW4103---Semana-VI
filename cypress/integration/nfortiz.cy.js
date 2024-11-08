@@ -45,19 +45,21 @@ it("Create empty page", () => {
 
     // Set content
     cy.get('textarea[data-test-editor-title-input=""]').type("A New Page by Cypress")
-    cy.get('div[data-placeholder="Begin writing your post..."]').type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
+    cy.get('p[data-koenig-dnd-droppable="true"]').first().type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
+
+    cy.wait(500)
 
     cy.get('textarea[data-test-editor-title-input=""]').clear();
     cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
 
-    cy.wait("@createPage")
+    cy.wait(500)
 
     cy.get('button[data-test-button="publish-flow"]').click(); // click en publicar
 
     cy.wait(500)
     cy.get('div.epm-modal-container').within(() => {
-        cy.get('button[data-test-button="continue"]').contains('Publish').click() // click en continuar
-        cy.get('span[data-test-task-button-state="idle"]').click(); //click en confirmar
+        cy.get('button[data-test-button="continue"]').first().click() // click en continuar
+        cy.get('span[data-test-task-button-state="idle"]').first().click(); //click en confirmar
     })
 
     cy.wait(500)
