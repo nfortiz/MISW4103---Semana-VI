@@ -2,15 +2,12 @@ const BASE_URL = "http://localhost:8080";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
-        // returning false here prevents Cypress from
-        // failing the test
         return false;
     });
 
-
     beforeEach(()=>{
-    cy.visit(BASE_URL + '/ghost/#/signin');
-    cy.get('a[title="Dashboard"]').should('be.visible');
+        cy.visit(BASE_URL + '/ghost/#/signin');
+        cy.get('a[title="Dashboard"]').should('be.visible');
     });
 
     it("Escenario: Create new page", () => {
@@ -130,6 +127,58 @@ describe('Test feature pages', () => {
         cy.screenshot('DELETE PAGE')
     });
 })
+
+
+describe('Test feature members', () => {
+    it('Escenario create member', () => {
+        cy.visit(BASE_URL + '/ghost/#/members');
+        cy.screenshot('Before Create member');
+
+        cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
+        cy.location("hash").should("equal", "#/members/new"); // check location
+
+        // Llenar form
+        cy.get('form.member-basic-info-form').within(() => {
+            cy.get('input#member-name').type('Fernando');
+            cy.get('input#member-email').type('fernando@mail.com');
+            cy.get('textarea#member-note').type('create by cypress');
+        })
+
+        // Click en save
+        cy.intercept('POST', '/ghost/api/admin/members/**').as('createMember');
+        cy.get('button[data-test-button="save"]').first().save();
+
+        cy.wait('@createMember')
+
+        cy.visit(BASE_URL + '/ghost/#/members');  
+        cy.screenshot('Member Created');
+    });
+
+    it('Escenario create member with special character', () => {
+        cy.visit(BASE_URL + '/ghost/#/members');
+        cy.screenshot('Before Create member');
+
+        cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
+        cy.location("hash").should("equal", "#/members/new"); // check location
+
+        // Llenar form
+        cy.get('form.member-basic-info-form').within(() => {
+            cy.get('input#member-name').type('👍Daniel');
+            cy.get('input#member-email').type('daniel@mail.com');
+            cy.get('textarea#member-note').type('create by cypress');
+        })
+
+        // Click en save
+        cy.intercept('POST', '**/ghost/api/admin/members/**').as('createMember');
+        cy.get('button[data-test-button="save"]').first().save();
+
+        cy.wait('@createMember')
+
+        cy.visit(BASE_URL + '/ghost/#/members');  
+        cy.screenshot('Member Created');
+    });
+});
+
 
 function doLogIn() {
 
