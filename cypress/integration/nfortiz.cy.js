@@ -49,7 +49,7 @@ describe('Test feature pages', () => {
         cy.wait(500)
 
         cy.get('textarea[data-test-editor-title-input=""]').clear();
-        cy.get('div[data-placeholder="Begin writing your post..."]').clear();    
+        cy.get('p[data-koenig-dnd-droppable="true"]').first().clear();    
 
         cy.wait(500)
 
@@ -68,7 +68,7 @@ describe('Test feature pages', () => {
     it("Escenario: Edit page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before Edit');
-        cy.get('span.gh-post-list-cta.edit').click(); //Click on Edit first page
+        cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
         cy.location("hash").should("equal", "#/editor/page"); // check location
 
         cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
@@ -91,7 +91,7 @@ describe('Test feature pages', () => {
     it("Escenario: Unpublish page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before Unpublish');
-        cy.get('span.gh-post-list-cta.edit').click(); //Click on Edit first page
+        cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
         cy.location("hash").should("equal", "#/editor/page"); // check location
 
 
@@ -112,7 +112,7 @@ describe('Test feature pages', () => {
     it("Escenario: Delete page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before DElete');
-        cy.get('span.gh-post-list-cta.edit').click(); //Click on Edit first page
+        cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
         cy.location("hash").should("equal", "#/editor/page"); // check location
 
         cy.get('button.settings-menu-toggle').first().click(); // click en menu lateral
