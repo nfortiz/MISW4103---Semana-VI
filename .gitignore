@@ -21,4 +21,4 @@ lerna-debug.log*
 # Optional eslint cache
 .eslintcache
 
-# Optional stylelin
+*.png
