@@ -4,7 +4,7 @@ const { getTitlePostSection, clickNewPost,writeTitlePost, clickContentPost,
   clickNewPostCloseModal, lastPostCreated, viewContent, updatePostButton,
   clickBackToPosts, deletePost} = require('../pages/post');
 const { logIn, logInButton } = require('../pages/login');
-const { getTitleAdmin, clickPosts } = require('../pages/principal');
+const { getTitleAdmin, clickPosts, clickTags } = require('../pages/principal');
 
 //Seccion login
 When('I enter email {string} password {string}', async function (email, password) {
@@ -22,6 +22,10 @@ Then('Página principal del administrador', async function () {
 
 Then('Clic en la sección de Posts', async function () {
   await clickPosts(this.driver);
+});
+
+Then('Clic en la sección de Tags', async function () {
+  await clickTags(this.driver);
 });
 
 //Posts
