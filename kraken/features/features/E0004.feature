@@ -20,6 +20,7 @@ Scenario: E0004 - Editar el titulo y contenido de un post previamente creado
   Then Cierre el modal de confirmación
   Then Valida Post publicado en la lista de posts
   Then Entro al post creado
+  And I wait for 1 seconds
   Then Edito el titulo
   Then Clic en Contenido
   Then Edito contenido del post
@@ -28,4 +29,5 @@ Scenario: E0004 - Editar el titulo y contenido de un post previamente creado
   Then Clic para devolverse a los posts
   Then Valida titulo del Post editado en la lista de posts
   Then Entro al post editado
+  Then Clic en Contenido
   Then Valido el contenido del post editado

@@ -1,7 +1,7 @@
 Feature: Ghost
 
-@user2 @web
-Scenario: E0002 - Crear un post con titulo y contenido
+@user4 @web
+Scenario: E0004 - Editar el titulo y contenido de un post previamente creado
   Given I navigate to page "http://localhost:2368/ghost/#/signin"
   When I enter email "d.andrades@uniandes.edu.co" password "ArpolisVI204*"
   And I wait for 1 seconds
@@ -20,4 +20,14 @@ Scenario: E0002 - Crear un post con titulo y contenido
   Then Cierre el modal de confirmación
   Then Valida Post publicado en la lista de posts
   Then Entro al post creado
-  Then Valido el contenido del post
+  And I wait for 1 seconds
+  Then Edito el titulo
+  Then Clic en Contenido
+  Then Edito contenido del post
+  And I wait for 1 seconds
+  Then Clic en boton de Update
+  Then Clic para devolverse a los posts
+  Then Valida titulo del Post editado en la lista de posts
+  Then Entro al post editado
+  Then Clic en Contenido
+  Then Valido el contenido del post editado

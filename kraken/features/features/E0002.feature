@@ -18,6 +18,9 @@ Scenario: E0002 - Crear un post con titulo y contenido
   Then Clic en el boton Continue
   Then Clic en el boton Publish Post
   Then Cierre el modal de confirmación
+  And I wait for 1 seconds
   Then Valida Post publicado en la lista de posts
   Then Entro al post creado
+  And I wait for 1 seconds
+  Then Clic en Contenido
   Then Valido el contenido del post
