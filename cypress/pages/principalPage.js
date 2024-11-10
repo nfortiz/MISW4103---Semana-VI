@@ -13,4 +13,8 @@ export class PrincipalPage {
     static clickTags() {
         return cy.get('[data-test-nav="tags"]').click({ force: true });
     }
+
+    static visitMembers(BASE_URL) {
+        return cy.visit(BASE_URL + "ghost/#/members");
+    }
 }
