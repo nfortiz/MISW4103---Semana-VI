@@ -48,7 +48,7 @@ export class MembersPage {
   }
 
   static clickMemberByEmail(email) {
-    return cy.contains("p.gh-members-list-email", email).click();
+    return cy.contains("p.gh-members-list-email", email).click({force: true});
   }
 
   static openMemberActions() {
