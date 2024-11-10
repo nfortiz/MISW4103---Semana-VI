@@ -31,28 +31,29 @@ export class TagPage {
   static clickDeleteConfirmTag() {
     return cy.get('[data-test-button="confirm"]').click({ force: true });
   }
-
+  
   static lastTagCreated(name, flag) {
-    // Obteniendo todos los enlaces con el atributo correcto
-    cy.get("a.gh-tags-list-item")
-      .first()
-      .within(() => {
-        // Encuentra el tag por data-test-post-id y guarda su ID
-        if (flag === "notClick") {
-          cy.get("a")
-            .first()
-            .then(() => {
-              cy.get("a.gh-tag-list-title")
-                .first()
-                .should("include.text", name);
-            });
-        } else if (flag === "click") {
-          cy.get("a")
-            .first()
-            .then(() => {
-              cy.get("a.gh-tag-list-title").first().click({ force: true });
+    let link = null;
+    cy.get("ol.tags-list.gh-list").then(($ols) => {
+      cy.get("li").then(($lis) => {
+        for (let i = 0; i < $lis.length; i++) {
+          cy.get("li")
+            .eq(i)
+            .then(($li) => {
+              cy.get("a")
+                .eq(i)
+                .then(($a) => {
+                  if ($a.text().includes(name)) {
+                    cy.get("a").eq(i).first().should("include.text", name);
+                    link = $a;
+                  }
+                });
             });
         }
       });
+    });
+    if (flag === "click") {
+      if (link !== null) link.click({ force: true });
+    }
   }
 }
