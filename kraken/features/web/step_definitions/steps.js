@@ -283,16 +283,11 @@ Then('Entro al post editado', async function () {
   await lastPostCreated(this.driver, tituloEditado, "click");
 });
 
-Then('Valido el contenido del post editado', async function () {
-  let contenidoEditado = "Contenido de prueba editado";
-  await viewContent(this.driver, contenidoEditado);
-});
-
-Then('Clic derecho en el post creado', async function () {
+Then('Clic derecho en la Page creada', async function () {
   let titulo = 'Titulo de prueba';
-  await lastPostCreated(this.driver, titulo, "rightClick");
+  await lastPageCreated(this.driver, titulo, "rightClick");
 });
 
-Then('Elimino el post', async function () {
+Then('Elimino la Page', async function () {
   await deletePost(this.driver);
 });
