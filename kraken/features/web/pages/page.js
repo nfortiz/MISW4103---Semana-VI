@@ -40,6 +40,10 @@ module.exports = {
         let click = await driver.$('[data-test-link="pages"]');
         return click.click({ force: true });
     },
+    deletePage: async function (driver) {
+        let click = await driver.$('[data-test-button="delete"]');
+        return click.click({ force: true });
+    },
     lastPageCreated: async function (driver, title, flag) {
         const { expect } = await import('chai');
         let pageTitleElement = await driver.$("h3.gh-content-entry-title");

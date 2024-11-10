@@ -200,7 +200,8 @@ const {
   clickNewPageCloseModal,
   clickContentPage,
   lastPageCreated,
-  clickBackToPages
+  clickBackToPages,
+  deletePage
 } = requires('../pages/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
@@ -215,6 +216,11 @@ Then('Titulo del page', async function () {
   await writeTitlePage(this.driver, titulo);
 });
 
+Then('Titulo vacio de la Page', async function () {
+  let titulo = '';
+  await writeTitlePage(this.driver, titulo);
+});
+
 Then('Clic en Contenido', async function () {
   await clickContentPage(this.driver);
 });
@@ -223,6 +229,12 @@ Then('Contenido del Page', async function () {
   let contenido = "Contenido de prueba para page";
   await writeContentPage(this.driver, contenido);
 });
+
+Then('Contenido vacio de la Page', async function () {
+  let contenido = "";
+  await writeContentPage(this.driver, contenido);
+});
+
 
 Then('Clic en el boton publish-flow', async function () {
   await clickNewPagePublishFlow(this.driver);
@@ -289,5 +301,5 @@ Then('Clic derecho en la Page creada', async function () {
 });
 
 Then('Elimino la Page', async function () {
-  await deletePost(this.driver);
+  await deletePage(this.driver);
 });
