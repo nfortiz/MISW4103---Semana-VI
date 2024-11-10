@@ -4,7 +4,12 @@ const { getTitlePostSection, clickNewPost,writeTitlePost, clickContentPost,
   clickNewPostCloseModal, lastPostCreated, viewContent, updatePostButton,
   clickBackToPosts, deletePost} = require('../pages/post');
 const { logIn, logInButton } = require('../pages/login');
-const { getTitleAdmin, clickPosts, clickTags } = require('../pages/principal');
+const { 
+  getTitleAdmin, 
+  clickPosts,
+  clickPages, 
+  clickTags 
+} = require('../pages/principal');
 
 //Seccion login
 When('I enter email {string} password {string}', async function (email, password) {
@@ -22,6 +27,10 @@ Then('Página principal del administrador', async function () {
 
 Then('Clic en la sección de Posts', async function () {
   await clickPosts(this.driver);
+});
+
+Then('Click en la sección de Pages', async function () {
+  await clickPages(this.driver);
 });
 
 Then('Clic en la sección de Tags', async function () {
@@ -175,4 +184,113 @@ When('Clic en el tag {string}', async function (name) {
 
 Then('Clic en el input nombre tag', async function () {
   await clickNombreTag(this.driver);
+});
+
+// ---------
+// = Pages =
+// ---------
+const {
+  getTitlePageSection,
+  clickNewPage,
+  writeTitlePage,
+  writeContentPage,
+  clickNewPagePublishFlow,
+  clickNewPageContinue,
+  clickNewPagePublish,
+  clickNewPageCloseModal,
+  clickContentPage
+} = requires('../pages/page');
+Then('Página de listado de Pages', async function () {
+  await getTitlePageSection(this.driver);
+});
+
+Then('Click en el boton New Page', async function () {
+  await clickNewPage(this.driver);
+});
+
+Then('Titulo del page', async function () {
+  let titulo = 'Titulo de prueba';
+  await writeTitlePage(this.driver, titulo);
+});
+
+Then('Clic en Contenido', async function () {
+  await clickContentPage(this.driver);
+});
+
+Then('Contenido del Page', async function () {
+  let contenido = "Contenido de prueba para page";
+  await writeContentPage(this.driver, contenido);
+});
+
+Then('Clic en el boton publish-flow', async function () {
+  await clickNewPagePublishFlow(this.driver);
+});
+
+Then('Clic en el boton Continue', async function () {
+  await clickNewPageContinue(this.driver);
+});
+
+Then('Clic en el boton Publish Post', async function () {
+  await clickNewPagePublish(this.driver);
+});
+
+Then('Cierre el modal de confirmación', async function () {
+  await clickNewPageCloseModal(this.driver);
+});
+
+Then('Valida Page publicado en la lista de Pages', async function () {
+  let titulo = 'Titulo de prueba';
+  await lastPostCreated(this.driver, titulo, "notClick");
+});
+
+Then('Entro al post creado', async function () {
+  let titulo = 'Titulo de prueba';
+  await lastPostCreated(this.driver, titulo, "click");
+});
+
+Then('Valido el contenido del post', async function () {
+  let contenido = "Contenido de prueba";
+  await viewContent(this.driver, contenido);
+});
+
+Then('Edito el titulo', async function () {
+  let tituloEditado = 'Titulo de prueba editado';
+  await writeTitlePost(this.driver, tituloEditado);
+});
+
+Then('Edito contenido del post', async function () {
+  let contenidoEditado = "Contenido de prueba editado";
+  await writeContentPost(this.driver, contenidoEditado);
+});
+
+Then('Clic en boton de Update', async function () {
+  await updatePostButton(this.driver);
+});
+
+Then('Clic para devolverse a los posts', async function () {
+  await clickBackToPosts(this.driver);
+});
+
+Then('Valida titulo del Page editado en la lista de Pages', async function () {
+  let tituloEditado = 'Titulo de prueba editado';
+  await lastPostCreated(this.driver, tituloEditado, "notClick");
+});
+
+Then('Entro al post editado', async function () {
+  let tituloEditado = 'Titulo de prueba editado';
+  await lastPostCreated(this.driver, tituloEditado, "click");
+});
+
+Then('Valido el contenido del post editado', async function () {
+  let contenidoEditado = "Contenido de prueba editado";
+  await viewContent(this.driver, contenidoEditado);
+});
+
+Then('Clic derecho en el post creado', async function () {
+  let titulo = 'Titulo de prueba';
+  await lastPostCreated(this.driver, titulo, "rightClick");
+});
+
+Then('Elimino el post', async function () {
+  await deletePost(this.driver);
 });
