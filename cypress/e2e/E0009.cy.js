@@ -2,6 +2,7 @@ import { LogIn } from "../pages/logIn";
 import { TagPage } from "../pages/tagPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from "@faker-js/faker";
+const data = require('../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("The play() request was interrupted")) {
@@ -15,7 +16,7 @@ describe("Escenarios E2E para Ghost", function () {
     cy.visit("http://localhost:2368/ghost/#/signin");
 
     //When inicio sesión con mis credenciales
-    LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
+    LogIn.logIn(data.email, data.password);
     LogIn.logInButton();
   });
 

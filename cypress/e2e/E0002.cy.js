@@ -2,6 +2,7 @@ import { LogIn } from "../pages/logIn";
 import { PostPage } from "../pages/postPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from '@faker-js/faker';
+const data = require('../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
     if (err.message.includes("The play() request was interrupted")) {
@@ -11,14 +12,16 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 describe('Escenarios E2E para Ghost', function () {
 
-    beforeEach(() => {
+  beforeEach(() => {
+    cy.fixture('properties.json').then((data) => {
         //Given que estoy en la pagina del login del Admin
         cy.visit('http://localhost:2368/ghost/#/signin');
 
         //When inicio sesión con mis credenciales
-        LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
+        LogIn.logIn(data.email, data.password);
         LogIn.logInButton();
     });
+  });
 
     it('E0002 - Crear un post con titulo y contenido', function () {
         //When le de click en la sección de Posts

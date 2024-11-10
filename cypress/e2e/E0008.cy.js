@@ -2,6 +2,7 @@ import { LogIn } from "../pages/logIn";
 import { TagPage } from "../pages/tagPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from "@faker-js/faker";
+const data = require('../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("The play() request was interrupted")) {
@@ -11,12 +12,14 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
-    //Given que estoy en la pagina del login del Admin
-    cy.visit("http://localhost:2368/ghost/#/signin");
+    cy.fixture('properties.json').then((data) => {
+        //Given que estoy en la pagina del login del Admin
+        cy.visit('http://localhost:2368/ghost/#/signin');
 
-    //When inicio sesión con mis credenciales
-    LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
-    LogIn.logInButton();
+        //When inicio sesión con mis credenciales
+        LogIn.logIn(data.email, data.password);
+        LogIn.logInButton();
+    });
   });
 
   it("E0008 - Editar un tag con titulo y descripción", function () {
