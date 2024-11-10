@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8080";
+import { LogIn } from "../pages/logIn";
+const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -7,6 +8,8 @@ describe('Test feature pages', () => {
 
     beforeEach(()=>{
         cy.visit(BASE_URL + '/ghost/#/signin');
+        LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
+        LogIn.logInButton();
         cy.get('a[title="Dashboard"]').should('be.visible');
     });
 
@@ -170,7 +173,7 @@ describe('Test feature members', () => {
 
         // Click en save
         cy.intercept('POST', '**/ghost/api/admin/members/**').as('createMember');
-        cy.get('button[data-test-button="save"]').first().save();
+        cy.get('button[data-test-button="save"]').first().click();
 
         cy.wait('@createMember')
 
