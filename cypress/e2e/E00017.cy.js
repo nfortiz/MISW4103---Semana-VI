@@ -22,8 +22,8 @@ describe("Escenarios E2E para Ghost", function () {
     LogIn.logInButton();
   });
 
-  it("E0017 - Invalid Email Validation", function () {
-    // Navegar a la sección de miembros y abrir el formulario para crear un nuevo miembro
+  it("E00017 - Invalid Email Validation", function () {
+    // When Navegar a la sección de miembros y abrir el formulario para crear un nuevo miembro
     PrincipalPage.visitMembers(BASE_URL);
     cy.wait(2000);
     MembersPage.getScreenTitle().should("include.text", "Members");
@@ -37,23 +37,20 @@ describe("Escenarios E2E para Ghost", function () {
         expect(normalizedText).to.include("New member");
       });
 
-    // Generar un nombre y nota válidos, pero un email inválido
+    // Then Generar un nombre y nota válidos, pero un email inválido
     const memberData = {
       name: faker.name.fullName(),
       email: "invalid-email-format", // Email inválido
       note: faker.lorem.sentence(),
     };
 
-    // Llenar el formulario con el email inválido
+    // Then Llenar el formulario con el email inválido
     MembersPage.fillMemberForm(memberData);
 
-    // Hacer clic en el botón para guardar el nuevo miembro
+    // Then Hacer clic en el botón para guardar el nuevo miembro
     MembersPage.clickSaveButton();
 
-
-    // Verificar que se muestre el mensaje de error "Invalid Email."
+    // Then Verificar que se muestre el mensaje de error "Invalid Email."
     MembersPage.getInvalidEmailMessageElement().should('contain.text', 'Invalid Email.');
-     // Verificar que no se haya hecho ninguna solicitud POST ni PUT
-
   });
 });
