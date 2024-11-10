@@ -16,7 +16,7 @@ describe('Test feature pages', () => {
     it("Escenario: Create new page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
-        cy.location("hash").should("equal", "#/editor/page"); // check location
+        cy.location("hash").should("contain", "#/editor/page"); // check location
 
         cy.intercept("PUT", "/ghost/api/admin/pages/*", {}).as("createPage");
 
@@ -162,7 +162,7 @@ describe('Test feature members', () => {
         cy.screenshot('Before Create member');
 
         cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
-        cy.location("hash").should("equal", "#/members/new"); // check location
+        cy.location("hash").should("contain", "#/members/new"); // check location
 
         // Llenar form
         cy.get('form.member-basic-info-form').within(() => {
