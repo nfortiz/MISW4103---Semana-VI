@@ -1,29 +1,20 @@
-Feature: Ghost
+Feature: Ghost - Eliminar Miembro
 
-@user8 @web
-Scenario: E0008 - Editar un tag con titulo y descripción
+@user1 @web
+Scenario: E0020 - Delete Member
   Given I navigate to page "http://localhost:2368/ghost/#/signin"
   When I enter email "d.andrades@uniandes.edu.co" password "ArpolisVI204*"
   And I wait for 1 seconds
   Then I clic to Sign in
   Then Página principal del administrador
-  Then Clic en la sección de Tags
-  Then Página de listado de tags
-  Then Clic en el boton New tag
-  When Nombre del tag "Tag 8"
-  Then Clic en Descripción del tag
-  Then Descripción del tag "Contenido de tag 8"
-  Then Clic en el boton guardar
-  Then Clic en la sección de Tags
-  Then Página de listado de tags
-  When Clic en el tag "Tag 8"
+  Then Clic en la sección de Members
+  Then Clic en el botón de New Member
+  Then Contenido de member para eliminar
+  Then Clic en Save Member
+  Then clic en List Members
   And I wait for 1 seconds
-  Then Clic en el input nombre tag
-  Then Nombre del tag "Nombre Modificado"
-  And I wait for 1 seconds
-  Then Clic en Descripción del tag 
-  When Descripción del tag "Contenido modificado"
-  Then Clic en el boton guardar
-  And I wait for 1 seconds
-  Then Clic en la sección de Tags
-  When Valida Tag publicado en la lista de tags "Nombre Modificado"
+  Then Selecciona Member para editar
+  Then Abre menú de acciones del miembro
+  Then Clic en Eliminar Miembro
+  Then Confirma eliminación de Miembro
+  Then Verifica Miembro eliminado en la lista
