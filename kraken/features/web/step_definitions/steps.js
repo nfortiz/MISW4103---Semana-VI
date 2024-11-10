@@ -3,8 +3,11 @@ const { getTitlePostSection, clickNewPost,writeTitlePost, clickContentPost,
   writeContentPost,clickNewPostPublishFlow, clickNewPostContinue, clickNewPostPublish,
   clickNewPostCloseModal, lastPostCreated, viewContent, updatePostButton,
   clickBackToPosts, deletePost} = require('../pages/post');
+
+
+const { clickNewMember, writeFormMember, clickSaveMember, goToListMembers, validateMemberInList } = require('../pages/member');
 const { logIn, logInButton } = require('../pages/login');
-const { getTitleAdmin, clickPosts } = require('../pages/principal');
+const { getTitleAdmin, clickPosts, clickMembers } = require('../pages/principal');
 
 //Seccion login
 When('I enter email {string} password {string}', async function (email, password) {
@@ -118,4 +121,32 @@ Then('Clic derecho en el post creado', async function () {
 
 Then('Elimino el post', async function () {
   await deletePost(this.driver);
+});
+
+Then('Clic en la sección de Members', async function () {
+  await clickMembers(this.driver);
+});
+
+Then('Clic en el botón de New Member', async function () {
+  await clickNewMember(this.driver);
+});
+
+Then('Contenido del member', async function () {
+  let name = 'Nombre';
+  let email = 'dasda1312@gmail121.com';
+  let note = 'Nota de prueba';
+  await writeFormMember(this.driver, name, email, note);
+});
+
+Then('Clic en Save Member', async function () {
+  await clickSaveMember(this.driver);
+});
+
+Then('clic en List Members', async function () {
+  await goToListMembers(this.driver);
+});
+
+Then('Valida Member en lista', async function () {
+  let email = 'dasda1312@gmail121.com'; // Usa el mismo correo del miembro creado
+  await validateMemberInList(this.driver, email);
 });

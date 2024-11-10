@@ -3,6 +3,13 @@ import { PostPage } from "../pages/postPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from '@faker-js/faker';
 
+Cypress.on("uncaught:exception", (err, runnable) => {
+    if (err.message.includes("The play() request was interrupted")) {
+      return false; // Ignorar esta excepción específica relacionada con la interrupción de play()
+    }
+    // Permitir que otras excepciones no controladas se manejen normalmente
+  });
+
 describe('Escenarios E2E para Ghost', function () {
 
     beforeEach(() => {
@@ -44,7 +51,7 @@ describe('Escenarios E2E para Ghost', function () {
 
         //And le de click en el boton Continue, final review
         PostPage.continueButton();
-       
+
         //And le de click en el boton Publish post, right now
         PostPage.publishPostButtonFinal();
 
@@ -56,7 +63,7 @@ describe('Escenarios E2E para Ghost', function () {
 
         //When le de click en el post creado
         PostPage.lastPostCreated(titulo, 'click');
-        
+
         //Then edito el titulo del post
         let tituloEditado = faker.lorem.word();
         PostPage.writeTitle(tituloEditado);
