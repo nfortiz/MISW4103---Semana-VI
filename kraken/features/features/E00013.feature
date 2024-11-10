@@ -11,15 +11,15 @@ Scenario: E0003 - Editar el titulo de un post previamente creado
   Then Página de listado de Pages
   When Clic en el boton New Page
   Then Titulo del Page
-  Then Clic en Contenido
+  Then Clic en Contenido page
   Then Contenido del Page
   And I wait for 1 seconds
-  Then Clic en el boton publish-flow
-  Then Clic en el boton Continue
+  Then Clic en el boton publish-flow page
+  Then Clic en el boton Continue page
   Then Clic en el boton Publish Page
-  Then Cierre el modal de confirmación
+  Then Cierre el modal de confirmación page
   Then Entro a la Page creada
   Then Edito el titulo de la Page
-  Then Clic en Contenido
+  Then Clic en Contenido page
   Then Clic en boton de Update
   Then Clic para devolverse a las Pages

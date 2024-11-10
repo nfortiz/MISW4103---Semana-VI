@@ -41,7 +41,8 @@ const {
   getTitleAdmin,
   clickPosts,
   clickMembers,
-  clickTags
+  clickTags,
+  clickPages
 } = require("../pages/principal");
 
 const { Given, When, Then } = require('@cucumber/cucumber');
@@ -342,7 +343,7 @@ const {
   lastPageCreated,
   clickBackToPages,
   deletePage
-} = requires('../pages/page');
+} = require('../pages/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
 });
@@ -361,7 +362,7 @@ Then('Titulo vacio de la Page', async function () {
   await writeTitlePage(this.driver, titulo);
 });
 
-Then('Clic en Contenido', async function () {
+Then('Clic en Contenido page', async function () {
   await clickContentPage(this.driver);
 });
 
@@ -376,11 +377,11 @@ Then('Contenido vacio de la Page', async function () {
 });
 
 
-Then('Clic en el boton publish-flow', async function () {
+Then('Clic en el boton publish-flow page', async function () {
   await clickNewPagePublishFlow(this.driver);
 });
 
-Then('Clic en el boton Continue', async function () {
+Then('Clic en el boton Continue page', async function () {
   await clickNewPageContinue(this.driver);
 });
 
@@ -388,7 +389,7 @@ Then('Clic en el boton Publish Post', async function () {
   await clickNewPagePublish(this.driver);
 });
 
-Then('Cierre el modal de confirmación', async function () {
+Then('Cierre el modal de confirmación page', async function () {
   await clickNewPageCloseModal(this.driver);
 });
 

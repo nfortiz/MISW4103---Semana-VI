@@ -1,20 +1,19 @@
-Feature: Ghost - Eliminar Miembro
+Feature: Ghost
 
 @user1 @web
-Scenario: E0020 - Delete Member
+Scenario: E011 - Crear un page
   Given I navigate to page "http://localhost:2368/ghost/#/signin"
   When I enter email "d.andrades@uniandes.edu.co" password "ArpolisVI204*"
   And I wait for 1 seconds
   Then I clic to Sign in
   Then Página principal del administrador
-  Then Clic en la sección de Members
-  Then Clic en el botón de New Member
-  Then Contenido de member para eliminar
-  Then Clic en Save Member
-  Then clic en List Members
+  Then Click en la sección de Pages
+  Then Página de listado de Pages
+  When Click en el boton New Page
+  Then Titulo del page
+  Then Clic en Contenido
   And I wait for 1 seconds
-  Then Selecciona Member para editar
-  Then Abre menú de acciones del miembro
-  Then Clic en Eliminar Miembro
-  Then Confirma eliminación de Miembro
-  Then Verifica Miembro eliminado en la lista
+  Then Clic en el boton publish-flow
+  Then Clic en el boton Continue
+  Then Clic en el boton Publish Page
+  Then Cierre el modal de confirmación
