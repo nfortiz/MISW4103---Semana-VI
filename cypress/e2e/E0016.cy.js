@@ -1,0 +1,72 @@
+const BASE_URL = "http://localhost:2368/";
+import { LogIn } from "../pages/logIn";
+import { MembersPage } from "../pages/membersPage";
+import { PrincipalPage } from "../pages/principalPage";
+import { faker } from "@faker-js/faker";
+
+// Configuración para ignorar una excepción específica que podría interrumpir la prueba
+Cypress.on("uncaught:exception", (err, runnable) => {
+  if (err.message.includes("The play() request was interrupted")) {
+    return false; // Ignorar esta excepción específica relacionada con la interrupción de play()
+  }
+  // Permitir que otras excepciones no controladas se manejen normalmente
+});
+
+describe("Escenarios E2E para Ghost", function () {
+  beforeEach(() => {
+    // Given: Navegar a la página de inicio de sesión del administrador
+    cy.visit("http://localhost:2368/ghost/#/signin");
+
+    // When: Iniciar sesión con credenciales válidas
+    LogIn.logIn("d.andrades@uniandes.edu.co", "ArpolisVI204*");
+    LogIn.logInButton();
+
+    // Then: Verificar que la página principal de Ghost esté visible
+    PrincipalPage.getTitle().should("have.text", "MISW4103");
+  });
+
+  it("E0016 - Crear Member", function () {
+    // Navegar a la sección de miembros desde la página principal
+    PrincipalPage.visitMembers(BASE_URL);
+
+    // Generar datos ficticios para el nuevo miembro utilizando Faker
+    const memberData = {
+      name: faker.name.fullName(),
+      email: faker.internet.email(),
+      note: faker.lorem.sentence(),
+    };
+
+    cy.wait(2000); // Esperar a que la página de miembros cargue completamente
+
+    // Verificar que el administrador esté en la página de listado de miembros
+    MembersPage.getScreenTitle().should("include.text", "Members");
+
+    // Hacer clic en el botón para agregar un nuevo miembro
+    MembersPage.clickNewMemberButton();
+    cy.wait(2000); // Esperar a que cargue la página de creación de miembro
+
+    // Verificar que el título de la página indique "New member"
+    MembersPage.getScreenTitle()
+      .invoke("text")
+      .then((text) => {
+        const normalizedText = text.trim().replace(/\s+/g, " ");
+        expect(normalizedText).to.include("New member");
+      });
+
+    // Llenar el formulario con los datos del nuevo miembro
+    MembersPage.fillMemberForm(memberData);
+
+    // Hacer clic en el botón para guardar el nuevo miembro
+    MembersPage.clickSaveButton();
+
+    // Volver a la lista de miembros después de guardar el nuevo miembro
+    MembersPage.goToMembersList();
+
+    // Verificar que el nuevo miembro esté en la lista de miembros usando su correo electrónico
+    let memberFound = false;
+    MembersPage.getMembersList().then((membersList) => {
+      const emails = membersList.map((member) => member.email);
+      expect(emails).to.include(memberData.email);
+    });
+  });
+});
