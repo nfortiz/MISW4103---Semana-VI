@@ -23,7 +23,7 @@ describe("Escenarios E2E para Ghost", function () {
   });
 
   it("E00016 - Crear Member", function () {
-    // Navegar a la sección de miembros desde la página principal
+    // When Navegar a la sección de miembros desde la página principal
     PrincipalPage.visitMembers(BASE_URL);
 
     // Generar datos ficticios para el nuevo miembro utilizando Faker
@@ -35,14 +35,14 @@ describe("Escenarios E2E para Ghost", function () {
 
     cy.wait(2000); // Esperar a que la página de miembros cargue completamente
 
-    // Verificar que el administrador esté en la página de listado de miembros
+    // Then Verificar que el administrador esté en la página de listado de miembros
     MembersPage.getScreenTitle().should("include.text", "Members");
 
-    // Hacer clic en el botón para agregar un nuevo miembro
+    // Then Hacer clic en el botón para agregar un nuevo miembro
     MembersPage.clickNewMemberButton();
     cy.wait(2000); // Esperar a que cargue la página de creación de miembro
 
-    // Verificar que el título de la página indique "New member"
+    // Then Verificar que el título de la página indique "New member"
     MembersPage.getScreenTitle()
       .invoke("text")
       .then((text) => {
@@ -50,16 +50,16 @@ describe("Escenarios E2E para Ghost", function () {
         expect(normalizedText).to.include("New member");
       });
 
-    // Llenar el formulario con los datos del nuevo miembro
+    // Then Llenar el formulario con los datos del nuevo miembro
     MembersPage.fillMemberForm(memberData);
 
-    // Hacer clic en el botón para guardar el nuevo miembro
+    // Then Hacer clic en el botón para guardar el nuevo miembro
     MembersPage.clickSaveButton();
 
-    // Volver a la lista de miembros después de guardar el nuevo miembro
+    // Then Volver a la lista de miembros después de guardar el nuevo miembro
     MembersPage.goToMembersList();
 
-    // Verificar que el nuevo miembro esté en la lista de miembros usando su correo electrónico
+    // Then Verificar que el nuevo miembro esté en la lista de miembros usando su correo electrónico
     let memberFound = false;
     MembersPage.getMembersList().then((membersList) => {
       const emails = membersList.map((member) => member.email);
