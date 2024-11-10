@@ -9,12 +9,19 @@ Scenario: E0008 - Editar un tag con titulo y descripción
   Then Página principal del administrador
   Then Clic en la sección de Tags
   Then Página de listado de tags
-  Then Clic en el tag "New Tag"
+  Then Clic en el boton New tag
+  When Nombre del tag "Tag 8"
+  Then Clic en Descripción del tag
+  Then Descripción del tag "Contenido de tag 8"
+  Then Clic en el boton guardar
+  Then Clic en la sección de Tags
+  Then Página de listado de tags
+  Then Clic en el tag "Tag 8"
   And I wait for 1 seconds
-  Then Nombre del tag "New Nombre Modificado"
+  Then Nombre del tag "Nombre Modificado"
   Then Clic en Descripción del tag 
-  When Descripción del tag "Contenido de modificado"
+  When Descripción del tag "Contenido modificado"
   Then Clic en el boton guardar
   And I wait for 1 seconds
   Then Clic en la sección de Tags
-  When Valida Tag publicado en la lista de tags "New Nombre Modificado"
+  When Valida Tag publicado en la lista de tags "Nombre Modificado"
