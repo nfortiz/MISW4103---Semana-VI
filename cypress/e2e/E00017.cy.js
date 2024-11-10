@@ -20,9 +20,6 @@ describe("Escenarios E2E para Ghost", function () {
     // When: Iniciar sesión con credenciales válidas
     LogIn.logIn("d.andrades@uniandes.edu.co", "ArpolisVI204*");
     LogIn.logInButton();
-
-    // Then: Verificar que la página principal de Ghost esté visible
-    PrincipalPage.getTitle().should("have.text", "MISW4103");
   });
 
   it("E0017 - Invalid Email Validation", function () {

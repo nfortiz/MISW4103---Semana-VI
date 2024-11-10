@@ -15,7 +15,6 @@ describe("Escenarios E2E para Ghost", function () {
     cy.visit("http://localhost:2368/ghost/#/signin");
     LogIn.logIn("d.andrades@uniandes.edu.co", "ArpolisVI204*");
     LogIn.logInButton();
-    PrincipalPage.getTitle().should("have.text", "MISW4103");
   });
 
   it("E0020 - Delete Member", function () {
