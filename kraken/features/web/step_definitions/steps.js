@@ -67,6 +67,10 @@ Then("Clic en la sección de Posts", async function () {
   await clickPosts(this.driver);
 });
 
+Then('Click en la sección de Pages', async function () {
+  await clickPages(this.driver);
+});
+
 Then('Clic en la sección de Tags', async function () {
   await clickTags(this.driver);
 });
@@ -320,4 +324,172 @@ Then("Confirma eliminación de Miembro", async function () {
 
 Then("Verifica Miembro eliminado en la lista", async function () {
   await verifyMemberDeleted(this.driver, "dasda1313@correo.com");
+});
+
+
+
+//Tags
+const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
+  clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/tag');
+
+Then('Página de listado de tags', async function () {
+ await getTitleTagSection(this.driver);
+});
+
+Then('Clic en el boton New tag', async function () {
+ await clickNewTag(this.driver);
+});
+
+Then('Clic en el boton Eliminar', async function () {
+ await clickDeleteTag(this.driver);
+});
+
+Then('Clic en el boton Confirmar Eliminar', async function () {
+ await clickDeleteConfirmTag(this.driver);
+});
+
+When('Nombre del tag {string}', async function (name) {
+ await writeNameTag(this.driver, name);
+});
+
+When('Nombre del tag con caracteres especiales {string}', async function (name) {
+ await writeNameTag(this.driver, name);
+});
+
+Then('Clic en Descripción del tag', async function () {
+ await clickDescriptionTag(this.driver);
+});
+
+When('Descripción del tag {string}', async function (description) {
+ await writeDescriptionTag(this.driver, description);
+});
+
+Then('Clic en el boton guardar', async function () {
+ await clickNewTagSave(this.driver);
+});
+
+When('Valida Tag publicado en la lista de tags {string}', async function (name) {
+ await lastTagCreated(this.driver, name, "notClick");
+});
+
+When('Clic en el tag {string}', async function (name) {
+ await clicTag(this.driver, name);
+});
+
+Then('Clic en el input nombre tag', async function () {
+  await clickNombreTag(this.driver);
+});
+
+// ---------
+// = Pages =
+// ---------
+const {
+  getTitlePageSection,
+  clickNewPage,
+  writeTitlePage,
+  writeContentPage,
+  clickNewPagePublishFlow,
+  clickNewPageContinue,
+  clickNewPagePublish,
+  clickNewPageCloseModal,
+  clickContentPage,
+  lastPageCreated,
+  clickBackToPages,
+  deletePage
+} = requires('../pages/page');
+Then('Página de listado de Pages', async function () {
+  await getTitlePageSection(this.driver);
+});
+
+Then('Click en el boton New Page', async function () {
+  await clickNewPage(this.driver);
+});
+
+Then('Titulo del page', async function () {
+  let titulo = 'Titulo de prueba';
+  await writeTitlePage(this.driver, titulo);
+});
+
+Then('Titulo vacio de la Page', async function () {
+  let titulo = '';
+  await writeTitlePage(this.driver, titulo);
+});
+
+Then('Clic en Contenido', async function () {
+  await clickContentPage(this.driver);
+});
+
+Then('Contenido del Page', async function () {
+  let contenido = "Contenido de prueba para page";
+  await writeContentPage(this.driver, contenido);
+});
+
+Then('Contenido vacio de la Page', async function () {
+  let contenido = "";
+  await writeContentPage(this.driver, contenido);
+});
+
+
+Then('Clic en el boton publish-flow', async function () {
+  await clickNewPagePublishFlow(this.driver);
+});
+
+Then('Clic en el boton Continue', async function () {
+  await clickNewPageContinue(this.driver);
+});
+
+Then('Clic en el boton Publish Post', async function () {
+  await clickNewPagePublish(this.driver);
+});
+
+Then('Cierre el modal de confirmación', async function () {
+  await clickNewPageCloseModal(this.driver);
+});
+
+Then('Valida Page publicado en la lista de Pages', async function () {
+  let titulo = 'Titulo de prueba';
+  await lastPageCreated(this.driver, titulo, "notClick");
+});
+
+Then('Entro a la Page creada', async function () {
+  let titulo = 'Titulo de prueba';
+  await lastPageCreated(this.driver, titulo, "click");
+});
+
+Then('Valido el contenido del post', async function () {
+  let contenido = "Contenido de prueba";
+  await viewContent(this.driver, contenido);
+});
+
+Then('Edito el titulo de la Page', async function () {
+  let tituloEditado = 'Titulo de prueba editado';
+  await writeTitlePage(this.driver, tituloEditado);
+});
+
+Then('Edito contenido del post', async function () {
+  let contenidoEditado = "Contenido de prueba editado";
+  await writeContentPage(this.driver, contenidoEditado);
+});
+
+Then('Clic para devolverse a las Pages', async function () {
+  await clickBackToPages(this.driver);
+});
+
+Then('Valida titulo del Page editado en la lista de Pages', async function () {
+  let tituloEditado = 'Titulo de prueba editado';
+  await lastPostCreated(this.driver, tituloEditado, "notClick");
+});
+
+Then('Entro al post editado', async function () {
+  let tituloEditado = 'Titulo de prueba editado';
+  await lastPostCreated(this.driver, tituloEditado, "click");
+});
+
+Then('Clic derecho en la Page creada', async function () {
+  let titulo = 'Titulo de prueba';
+  await lastPageCreated(this.driver, titulo, "rightClick");
+});
+
+Then('Elimino la Page', async function () {
+  await deletePage(this.driver);
 });
