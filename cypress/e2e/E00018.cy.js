@@ -25,7 +25,7 @@ describe("Escenarios E2E para Ghost", function () {
     });
   });
 
-  it("E0017 - Invalid Email Validation", function () {
+  it("E0018 - Validación de Email Inválido y Longitud de Nota", function () {
     // When Navegar a la sección de miembros y abrir el formulario para crear un nuevo miembro
     PrincipalPage.visitMembers(BASE_URL);
     cy.wait(2000);
