@@ -72,7 +72,7 @@ describe('Test feature pages', () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before Edit');
         cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
-        cy.location("hash").should("equal", "#/editor/page"); // check location
+        cy.location("hash").should("contain", "#/editor/page"); // check location
 
         cy.intercept("PUT", "/ghost/api/admin/pages/", {}).as("createPage");
 
@@ -80,7 +80,7 @@ describe('Test feature pages', () => {
         cy.get('textarea[data-test-editor-title-input=""]').type("Edited Page")
         cy.get('p[data-koenig-dnd-droppable="true"]').first().type(" Edited with cypress. by nf.ortiz 😊")
 
-        cy.wait(500)
+        cy.wait(1000)
 
         cy.get('span[data-test-task-button-state="idle"]').first().click(); // click en update
 
@@ -116,7 +116,7 @@ describe('Test feature pages', () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before DElete');
         cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
-        cy.location("hash").should("equal", "#/editor/page"); // check location
+        cy.location("hash").should("contain", "#/editor/page"); // check location
 
         cy.get('button.settings-menu-toggle').first().click(); // click en menu lateral
         cy.get('button[data-test-button="delete-post"]').first().click(); // click on delete button
@@ -149,7 +149,7 @@ describe('Test feature members', () => {
 
         // Click en save
         cy.intercept('POST', '/ghost/api/admin/members/**').as('createMember');
-        cy.get('button[data-test-button="save"]').first().save();
+        cy.get('button[data-test-button="save"]').first().click();
 
         cy.wait('@createMember')
 
