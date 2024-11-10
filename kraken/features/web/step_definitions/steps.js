@@ -126,7 +126,7 @@ Then('Elimino el post', async function () {
 
 
 //Tags
-const { getTitleTagSection, clickNewTag, writeNameTag,
+const { getTitleTagSection, clickNewTag, writeNameTag, clickNombreTag,
   clickDescriptionTag, writeDescriptionTag, clickNewTagSave, clickDeleteTag, clickDeleteConfirmTag, lastTagCreated, clicTag, clickNewTagValidate } = require('../pages/tag');
 
 Then('Página de listado de tags', async function () {
@@ -173,3 +173,6 @@ When('Clic en el tag {string}', async function (name) {
  await clicTag(this.driver, name);
 });
 
+Then('Clic en el input nombre tag', async function () {
+  await clickNombreTag(this.driver);
+});

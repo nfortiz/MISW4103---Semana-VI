@@ -112,5 +112,10 @@ module.exports = {
     clickNewTagValidate: async function (driver) {
       return await this.lastTagCreated(driver, "New Tag", "notClick");
     },
+
+    clickNombreTag: async function (driver) {
+      let clic = await driver.$('#tag-name');
+      return await clic.click({ force: true });
+    }
   };
   

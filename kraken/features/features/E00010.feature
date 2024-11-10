@@ -1,9 +1,9 @@
 Feature: Ghost
 
 @user10 @web
-Scenario: E00010 - Crear tac con caracteres especiales.
+Scenario: E00010 - Crear tag con caracteres especiales.
   Given I navigate to page "http://localhost:2368/ghost/#/signin"
-  When I enter email "d.oicata@uniandes.edu.co" password "1090Oicata@"
+  When I enter email "d.andrades@uniandes.edu.co" password "ArpolisVI204*"
   And I wait for 1 seconds
   Then I clic to Sign in
   Then Página principal del administrador
