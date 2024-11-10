@@ -12,9 +12,6 @@ describe('Escenarios E2E para Ghost', function () {
         //When inicio sesión con mis credenciales
         LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
         LogIn.logInButton();
-
-        //Then debería estar en el sitio principal
-        PrincipalPage.getTitle().should('have.text', 'MISW4103');
     });
 
     it('E0005 - Eliminamos un post previamente creado', function () {

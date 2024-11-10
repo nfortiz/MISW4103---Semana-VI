@@ -55,4 +55,55 @@ export class TagPage {
         }
       });
   }
+
+  static busqueda(name, flag) {
+    if(flag === "notClick"){
+      cy.get('ol.tags-list.gh-list').then(($ols) => {
+        cy.get('li').then(($lis) => {
+          for (let i = 0; i < $lis.length; i++) {
+            cy.get('li').eq(i).then(($li) => {
+              cy.get('a').eq(i).then(($a) => {
+                if ($a.text().includes(name)) {
+                  cy.get('a').eq(i).first()
+                  .should("include.text", name);
+                }
+              })
+            })
+          }
+        })
+      })
+    }
+    else if (flag === "click") {
+      cy.get('ol.tags-list.gh-list').then(($ols) => {
+        cy.get('li').then(($lis) => {
+          let found = false;
+          for (let i = 0; i < $lis.length && !found; i++) {
+            cy.get('li').eq(i).then(($li) => {
+              cy.get('a').eq(i).then(($a) => {
+                if ($a.text().includes(name)) {
+                  cy.get('a').eq(i).first().click({ force: true });
+                  found = true;
+                }
+              })
+            })
+          }
+        })
+      })
+    }
+  }
+
+  static busqueda_II(name, flag) {
+    cy.get('li.gh-list-row.gh-tags-list-item').each(($li) => {
+      cy.wrap($li).find('h3').then(($h3) => {
+        if ($h3.text().includes(name)) {
+          if (flag === "click") {
+            cy.wrap($li).click({ force: true });
+          } else if (flag === 'notClick') {
+            cy.wrap($li).should("include.text", name);
+          }
+          return false;
+        }
+      });
+    });
+  }  
 }

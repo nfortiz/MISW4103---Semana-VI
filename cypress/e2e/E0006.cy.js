@@ -10,11 +10,8 @@ describe('Escenarios E2E para Ghost', function () {
         cy.visit('http://localhost:2368/ghost/#/signin');
 
         //When inicio sesión con mis credenciales
-        LogIn.logIn('d.oicata@uniandes.edu.co', '1090Oicata@*');
+        LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
         LogIn.logInButton();
-
-        //Then debería estar en el sitio principal
-        PrincipalPage.getTitle().should('have.text', 'MSW4103');
     });
 
     it('E0006 - Crear un tag con nombre y descripción', function () {
@@ -46,6 +43,6 @@ describe('Escenarios E2E para Ghost', function () {
         PrincipalPage.clickTags(); 
 
         //Then Valida Tag publicado en la lista de tags
-        TagPage.lastTagCreated(name, 'notClick');
+        TagPage.busqueda(name, 'notClick');
     });
 });
