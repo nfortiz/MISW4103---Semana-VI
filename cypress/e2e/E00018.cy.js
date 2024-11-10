@@ -3,6 +3,7 @@ import { LogIn } from "../pages/logIn";
 import { MembersPage } from "../pages/membersPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from "@faker-js/faker";
+const data = require('../fixtures/properties.json');
 
 // Configuración para ignorar una excepción específica que podría interrumpir la prueba
 Cypress.on("uncaught:exception", (err, runnable) => {
@@ -14,12 +15,14 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
-    // Given: Navegar a la página de inicio de sesión del administrador
-    cy.visit("http://localhost:2368/ghost/#/signin");
+    cy.fixture('properties.json').then((data) => {
+      //Given que estoy en la pagina del login del Admin
+      cy.visit('http://localhost:2368/ghost/#/signin');
 
-    // When: Iniciar sesión con credenciales válidas
-    LogIn.logIn("d.andrades@uniandes.edu.co", "ArpolisVI204*");
-    LogIn.logInButton();
+      //When inicio sesión con mis credenciales
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+    });
   });
 
   it("E0017 - Invalid Email Validation", function () {

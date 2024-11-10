@@ -3,6 +3,7 @@ import { LogIn } from "../pages/logIn";
 import { MembersPage } from "../pages/membersPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from "@faker-js/faker";
+const data = require('../fixtures/properties.json');
 
 Cypress.on("uncaught:exception", (err, runnable) => {
   if (err.message.includes("The play() request was interrupted")) {
@@ -12,9 +13,14 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 describe("Escenarios E2E para Ghost", function () {
   beforeEach(() => {
-    cy.visit("http://localhost:2368/ghost/#/signin");
-    LogIn.logIn("d.andrades@uniandes.edu.co", "ArpolisVI204*");
-    LogIn.logInButton();
+    cy.fixture('properties.json').then((data) => {
+      //Given que estoy en la pagina del login del Admin
+      cy.visit('http://localhost:2368/ghost/#/signin');
+
+      //When inicio sesión con mis credenciales
+      LogIn.logIn(data.email, data.password);
+      LogIn.logInButton();
+    });
   });
 
   it("E00019 - Edit Member", function () {
