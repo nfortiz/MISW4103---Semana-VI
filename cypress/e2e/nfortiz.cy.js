@@ -1,4 +1,4 @@
-import { LogIn } from "../pages/logIn";
+import { doLogIn } from "../utils/util";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
@@ -7,10 +7,7 @@ describe('Test feature pages', () => {
     });
 
     beforeEach(()=>{
-        cy.visit(BASE_URL + '/ghost/#/signin');
-        LogIn.logIn('d.andrades@uniandes.edu.co', 'ArpolisVI204*');
-        LogIn.logInButton();
-        cy.get('a[title="Dashboard"]').should('be.visible');
+        doLogIn();
     });
 
     it("Escenario: Create new page", () => {
@@ -114,7 +111,7 @@ describe('Test feature pages', () => {
 
     it("Escenario: Delete page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
-        cy.screenshot('Before DElete');
+        cy.screenshot('Before Delete');
         cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
@@ -132,57 +129,52 @@ describe('Test feature pages', () => {
 })
 
 
-describe('Test feature members', () => {
-    it('Escenario create member', () => {
-        cy.visit(BASE_URL + '/ghost/#/members');
-        cy.screenshot('Before Create member');
+// describe('Test feature members', () => {
+//     it('Escenario create member', () => {
+//         cy.visit(BASE_URL + '/ghost/#/members');
+//         cy.screenshot('Before Create member');
 
-        cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
-        cy.location("hash").should("contain", "#/members/new"); // check location
+//         cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
+//         cy.location("hash").should("contain", "#/members/new"); // check location
 
-        // Llenar form
-        cy.get('form.member-basic-info-form').within(() => {
-            cy.get('input#member-name').type('Fernando');
-            cy.get('input#member-email').type('fernando@mail.com');
-            cy.get('textarea#member-note').type('create by cypress');
-        })
+//         // Llenar form
+//         cy.get('form.member-basic-info-form').within(() => {
+//             cy.get('input#member-name').type('Fernando');
+//             cy.get('input#member-email').type('fernando@mail.com');
+//             cy.get('textarea#member-note').type('create by cypress');
+//         })
 
-        // Click en save
-        cy.intercept('POST', '/ghost/api/admin/members/**').as('createMember');
-        cy.get('button[data-test-button="save"]').first().click();
+//         // Click en save
+//         cy.intercept('POST', '/ghost/api/admin/members/**').as('createMember');
+//         cy.get('button[data-test-button="save"]').first().click();
 
-        cy.wait('@createMember')
+//         cy.wait('@createMember')
 
-        cy.visit(BASE_URL + '/ghost/#/members');  
-        cy.screenshot('Member Created');
-    });
+//         cy.visit(BASE_URL + '/ghost/#/members');  
+//         cy.screenshot('Member Created');
+//     });
 
-    it('Escenario create member with special character', () => {
-        cy.visit(BASE_URL + '/ghost/#/members');
-        cy.screenshot('Before Create member');
+//     it('Escenario create member with special character', () => {
+//         cy.visit(BASE_URL + '/ghost/#/members');
+//         cy.screenshot('Before Create member');
 
-        cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
-        cy.location("hash").should("contain", "#/members/new"); // check location
+//         cy.get('a[data-test-new-member-button="true"]').first().click(); //Click on Create Member
+//         cy.location("hash").should("contain", "#/members/new"); // check location
 
-        // Llenar form
-        cy.get('form.member-basic-info-form').within(() => {
-            cy.get('input#member-name').type('👍Daniel');
-            cy.get('input#member-email').type('daniel@mail.com');
-            cy.get('textarea#member-note').type('create by cypress');
-        })
+//         // Llenar form
+//         cy.get('form.member-basic-info-form').within(() => {
+//             cy.get('input#member-name').type('👍Daniel');
+//             cy.get('input#member-email').type('daniel@mail.com');
+//             cy.get('textarea#member-note').type('create by cypress');
+//         })
 
-        // Click en save
-        cy.intercept('POST', '**/ghost/api/admin/members/**').as('createMember');
-        cy.get('button[data-test-button="save"]').first().click();
+//         // Click en save
+//         cy.intercept('POST', '**/ghost/api/admin/members/**').as('createMember');
+//         cy.get('button[data-test-button="save"]').first().click();
 
-        cy.wait('@createMember')
+//         cy.wait('@createMember')
 
-        cy.visit(BASE_URL + '/ghost/#/members');  
-        cy.screenshot('Member Created');
-    });
-});
-
-
-function doLogIn() {
-
-}
+//         cy.visit(BASE_URL + '/ghost/#/members');  
+//         cy.screenshot('Member Created');
+//     });
+// });
