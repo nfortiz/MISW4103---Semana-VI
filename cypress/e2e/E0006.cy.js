@@ -3,6 +3,12 @@ import { TagPage } from "../pages/tagPage";
 import { PrincipalPage } from "../pages/principalPage";
 import { faker } from '@faker-js/faker';
 
+Cypress.on("uncaught:exception", (err, runnable) => {
+    if (err.message.includes("The play() request was interrupted")) {
+      return false;
+    }
+  });
+
 describe('Escenarios E2E para Ghost', function () {
 
     beforeEach(() => {
