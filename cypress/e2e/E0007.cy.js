@@ -42,7 +42,7 @@ describe("Escenarios E2E para Ghost", function () {
     PrincipalPage.clickTags();
 
     //Then Valida Tag publicado en la lista de tags
-    TagPage.busqueda_II(name, "click");
+    TagPage.lastTagCreated(name, "click");
     cy.wait(1000);
 
     //When le de click en la descripción del tag
@@ -60,6 +60,6 @@ describe("Escenarios E2E para Ghost", function () {
     PrincipalPage.clickTags();
 
     //Then Valida Tag publicado en la lista de tags
-    TagPage.busqueda_II(name, "notClick");
+    TagPage.busqueda(name, "notClick");
   });
 });

@@ -42,7 +42,7 @@ describe("Escenarios E2E para Ghost", function () {
     PrincipalPage.clickTags();
 
     //Then Valida Tag publicado en la lista de tags
-    TagPage.busqueda(name, "click");
+    TagPage.lastTagCreated(name, "click");
     cy.wait(1000);
 
     //Then escriba el nuevo nombre del tag
