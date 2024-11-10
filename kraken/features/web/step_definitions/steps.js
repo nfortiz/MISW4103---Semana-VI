@@ -198,7 +198,9 @@ const {
   clickNewPageContinue,
   clickNewPagePublish,
   clickNewPageCloseModal,
-  clickContentPage
+  clickContentPage,
+  lastPageCreated,
+  clickBackToPages
 } = requires('../pages/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
@@ -240,12 +242,12 @@ Then('Cierre el modal de confirmación', async function () {
 
 Then('Valida Page publicado en la lista de Pages', async function () {
   let titulo = 'Titulo de prueba';
-  await lastPostCreated(this.driver, titulo, "notClick");
+  await lastPageCreated(this.driver, titulo, "notClick");
 });
 
-Then('Entro al post creado', async function () {
+Then('Entro a la Page creada', async function () {
   let titulo = 'Titulo de prueba';
-  await lastPostCreated(this.driver, titulo, "click");
+  await lastPageCreated(this.driver, titulo, "click");
 });
 
 Then('Valido el contenido del post', async function () {
@@ -253,22 +255,22 @@ Then('Valido el contenido del post', async function () {
   await viewContent(this.driver, contenido);
 });
 
-Then('Edito el titulo', async function () {
+Then('Edito el titulo de la Page', async function () {
   let tituloEditado = 'Titulo de prueba editado';
-  await writeTitlePost(this.driver, tituloEditado);
+  await writeTitlePage(this.driver, tituloEditado);
 });
 
 Then('Edito contenido del post', async function () {
   let contenidoEditado = "Contenido de prueba editado";
-  await writeContentPost(this.driver, contenidoEditado);
+  await writeContentPage(this.driver, contenidoEditado);
 });
 
 Then('Clic en boton de Update', async function () {
   await updatePostButton(this.driver);
 });
 
-Then('Clic para devolverse a los posts', async function () {
-  await clickBackToPosts(this.driver);
+Then('Clic para devolverse a las Pages', async function () {
+  await clickBackToPages(this.driver);
 });
 
 Then('Valida titulo del Page editado en la lista de Pages', async function () {

@@ -36,4 +36,21 @@ module.exports = {
         let clickButton = await driver.$('[data-test-button="close-publish-flow"]');
         return clickButton.click({ force: true });
     },
+    clickBackToPages: async function (driver) {
+        let click = await driver.$('[data-test-link="pages"]');
+        return click.click({ force: true });
+    },
+    lastPageCreated: async function (driver, title, flag) {
+        const { expect } = await import('chai');
+        let pageTitleElement = await driver.$("h3.gh-content-entry-title");
+        let pageTitle = await pageTitleElement.getText();
+  
+        if (flag === "notClick") {
+          expect(pageTitle).to.contain(title);
+        } else if (flag === "click") {
+          await pageTitleElement.click({ force: true });
+        } else {
+          await pageTitleElement.click({ button: "right", force: true });
+        }
+    },
 };
