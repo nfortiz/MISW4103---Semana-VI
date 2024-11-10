@@ -277,10 +277,6 @@ Then('Edito contenido del post', async function () {
   await writeContentPage(this.driver, contenidoEditado);
 });
 
-Then('Clic en boton de Update', async function () {
-  await updatePostButton(this.driver);
-});
-
 Then('Clic para devolverse a las Pages', async function () {
   await clickBackToPages(this.driver);
 });

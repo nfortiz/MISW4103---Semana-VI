@@ -22,4 +22,4 @@ Scenario: E0003 - Editar el titulo de un post previamente creado
   Then Edito el titulo de la Page
   Then Clic en Contenido
   Then Clic en boton de Update
-  Then Clic para devolverse a los Pages
+  Then Clic para devolverse a las Pages
