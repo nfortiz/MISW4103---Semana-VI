@@ -1,4 +1,5 @@
 import { doLogIn } from "../utils/util";
+const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
