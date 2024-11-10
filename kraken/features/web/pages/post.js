@@ -10,14 +10,14 @@ module.exports = {
       }
       return titleField.getText();
     },
-  
+
     clickNewPost: async function (driver) {
       let clicButton = await driver.$('[data-test-new-post-button=""]');
       return clicButton.click({ force: true });
     },
     writeTitlePost: async function (driver, title) {
       let textField = await driver.$('[data-test-editor-title-input=""]');
-      await textField.setValue(title);  
+      await textField.setValue(title);
     },
     clickContentPost: async function (driver) {
       let contentField = await driver.$('[data-kg="editor"]');
@@ -68,7 +68,7 @@ module.exports = {
       let clic = await driver.$('[data-test-button="publish-save"]');
       return clic.click({ force: true });
     },
-    
+
     clickBackToPosts: async function (driver) {
       let clic = await driver.$('[data-test-link="posts"]');
       return clic.click({ force: true });
