@@ -24,7 +24,7 @@ export const CONTENT = {
     editPageButton: 'span.gh-post-list-cta.edit',
     updatePageButton: 'button.gh-btn-editor',
     goToPagesButton: 'a[data-test-link="pages"]',
-    unpublishPageButton: 'button[data-test-button="update-flow"]'
+    unpublishPageButton: 'button[data-test-button="update-flow"]',
 }
 
 export function addContentToPage(title, content) {

@@ -24,7 +24,7 @@ describe('Test feature pages', () => {
         cy.get('button[data-test-button="delete-post"]').first().click(); // click on delete button
 
         cy.wait(500)
-        cy.get('div.epm-modal-container').within(() => {
+        cy.get(CONTENT.newPageModal).within(() => {
             cy.get('button[data-test-button="delete-post-confirm"]').contains('Delete').click() // click en delete
         })
 
