@@ -32,4 +32,4 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 ### Ejecución Kraken
 - **Instalación de Kraken:** Para instalar Kraken, utiliza el comando `npm install kraken-node`. Después de la instalación, es importante verificar que todos los prerequisitos necesarios estén cumplidos. Ejecuta el comando `npx kraken-node doctor` para confirmar que todos los componentes requeridos están instalados. Si algún prerequisito falta, se debe instalar antes de ejecutar las pruebas.
 
-- **Ejecución Kraken:** En primera instancia, se debe ingresar a la carpeta de Kraken. Para ello, desde la terminal se debe correr el comando `cd kraken`.
+- **Ejecución Kraken:** En primera instancia, se debe ingresar a la carpeta de Kraken. Para ello, desde la terminal se debe correr el comando `cd kraken`. Luego, en la ruta `kraken\features\features`
