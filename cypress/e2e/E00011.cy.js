@@ -1,4 +1,9 @@
-import { doLogIn, CONTENT } from "../utils/pages";
+import { 
+    doLogIn, 
+    CONTENT, 
+    addContentToPage, 
+    confirmCreatePage 
+} from "../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
@@ -18,18 +23,15 @@ describe('Test feature pages', () => {
         cy.intercept("PUT", "/ghost/api/admin/pages/*", {}).as("createPage");
 
         // Set content
-        cy.get(CONTENT.pageTitleInput).type("A New Page by Cypress")
-        cy.get(CONTENT.pageContentInput).first().type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
+        let content = " To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.";
+        addContentToPage("A New Page by Cypress", content)
 
         cy.wait(1000)
 
         cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
         cy.wait(500)
-        cy.get(CONTENT.newPageModal).within(() => {
-            cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
-            cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
-        })
+        confirmCreatePage();
 
         cy.wait(500)
         cy.screenshot('New Page')
