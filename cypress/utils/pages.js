@@ -13,3 +13,12 @@ export function doLogIn() {
     cy.get('a[title="Dashboard"]').should('be.visible');
 }
 
+export const CONTENT = {
+    newPageButton: 'a[data-test-new-page-button=""]',
+    pageTitleInput: 'textarea[data-test-editor-title-input=""]',
+    pageContentInput: 'p[data-koenig-dnd-droppable="true"]',
+    publishPageButton: 'button[data-test-button="publish-flow"]',
+    newPageModal: 'div.epm-modal-container',
+    continueCreationPageButton: 'button[data-test-button="continue"]',
+    confirmCreationPageButton: 'span[data-test-task-button-state="idle"]'
+}
