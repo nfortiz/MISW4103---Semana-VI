@@ -24,7 +24,7 @@ describe('Test feature pages', () => {
         cy.get(CONTENT.unpublishPageButton).contains('Unpublish').first().click(); // click en unpublish
 
         cy.wait(500)
-        cy.get('div.epm-modal-container').within(() => {
+        cy.get(CONTENT.newPageModal).within(() => {
             cy.get('button[data-test-button="revert-to-draft"]').first().click() // click en continuar
         })
         
