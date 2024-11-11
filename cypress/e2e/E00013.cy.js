@@ -14,7 +14,7 @@ describe('Test feature pages', () => {
         doLogIn();
     });
 
-    it("Escenario: Edit page", () => {
+    it("Escenario 013: Edit page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before Edit');
         cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
