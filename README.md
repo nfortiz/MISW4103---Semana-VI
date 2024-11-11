@@ -30,6 +30,6 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 - **Ejecución de pruebas:** Para iniciar las pruebas, primero abre una terminal y ejecuta `npx cypress open`, lo que lanzará la interfaz de Cypress. Crea un nuevo proyecto apuntando al directorio donde clonaste el repositorio. Dentro de la carpeta e2e encontrarás 20 archivos, cada uno identificado con el código `E000XXX`, que representa un escenario específico de prueba. Para ejecutar las pruebas, haz clic en cada archivo `E000XXX.cy.js`. Se recomienda ejecutarlos uno por uno para un mejor control de los resultados.
 
 ### Ejecución Kraken
-- **Instalación de Kraken:** Para instalar Kraken, utiliza el comando `npm install kraken-node`. Después de la instalación, es importante verificar que todos los prerequisitos necesarios estén cumplidos. Ejecuta el comando npx kraken-node doctor para confirmar que todos los componentes requeridos están instalados. Si algún prerequisito falta, instálalo antes de ejecutar las pruebas.
+- **Instalación de Kraken:** Para instalar Kraken, utiliza el comando `npm install kraken-node`. Después de la instalación, es importante verificar que todos los prerequisitos necesarios estén cumplidos. Ejecuta el comando `npx kraken-node doctor` para confirmar que todos los componentes requeridos están instalados. Si algún prerequisito falta, se debe instalar antes de ejecutar las pruebas.
 
-- 
+- **Ejecución Kraken:** En primera instancia, se debe ingresar a la carpeta de Kraken. Para ello, desde la terminal se debe correr el comando `cd kraken`.
