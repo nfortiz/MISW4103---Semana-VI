@@ -8,7 +8,7 @@ export const data = {
 
 export function doLogIn() {
     cy.visit(BASE_URL + '/ghost/#/signin');
-    LogIn.logIn(data.password, data.password);
+    LogIn.logIn(data.email, data.password);
     LogIn.logInButton();
     cy.get('a[title="Dashboard"]').should('be.visible');
 }
