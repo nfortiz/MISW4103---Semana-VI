@@ -350,7 +350,9 @@ const {
   clickContentPage,
   lastPageCreated,
   clickBackToPages,
-  deletePage
+  deletePage,
+  clickPageUnPublish,
+  clickPageRevertToDraft
 } = require('../pages/page');
 Then('Página de listado de Pages', async function () {
   await getTitlePageSection(this.driver);
@@ -395,6 +397,14 @@ Then('Clic en el boton Continue page', async function () {
 
 Then('Clic en el boton Publish Page', async function () {
   await clickNewPagePublish(this.driver);
+});
+
+Then('Click en el boton UnPublish Page', async function () {
+  await clickPageUnPublish(this.driver);
+});
+
+Then('Click en el boton revert to draft Page', async function () {
+  await clickPageRevertToDraft(this.driver);
 });
 
 Then('Cierre el modal de confirmación page', async function () {
