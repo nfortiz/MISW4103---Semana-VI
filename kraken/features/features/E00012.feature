@@ -7,9 +7,9 @@ Scenario: E012 - Crear una page vacia. sin contenido.
   And I wait for 1 seconds
   Then I clic to Sign in
   Then Página principal del administrador
-  Then Clic en la sección de Pages
+  Then Click en la sección de Pages
   Then Página de listado de Pages
-  When Clic en el boton New Page
+  When Click en el boton New Page
   Then Titulo del page
   Then Clic en Contenido page
   Then Contenido del Page

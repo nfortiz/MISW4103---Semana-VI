@@ -1,4 +1,7 @@
-import { doLogIn } from "../utils/util";
+import {    
+    CONTENT, 
+    doLogIn
+} from "../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
@@ -10,18 +13,18 @@ describe('Test feature pages', () => {
         doLogIn();
     });
 
-    it("Escenario: Unpublish page", () => {
+    it("Escenario 014: Unpublish page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before Unpublish');
-        cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
+        cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
         cy.location("hash").should("contains", "#/editor/page"); // check location
 
 
         cy.wait(500)
-        cy.get('button[data-test-button="update-flow"]').contains('Unpublish').first().click(); // click en unpublish
+        cy.get(CONTENT.unpublishPageButton).contains('Unpublish').first().click(); // click en unpublish
 
         cy.wait(500)
-        cy.get('div.epm-modal-container').within(() => {
+        cy.get(CONTENT.newPageModal).within(() => {
             cy.get('button[data-test-button="revert-to-draft"]').first().click() // click en continuar
         })
         

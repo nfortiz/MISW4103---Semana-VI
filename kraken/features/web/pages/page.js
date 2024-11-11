@@ -32,6 +32,14 @@ module.exports = {
         let clickButton = await driver.$('[data-test-button="confirm-publish"]');
         return clickButton.click({ force: true });
     },
+    clickPageUnPublish: async function (driver) {
+        let clickButton = await driver.$('[data-test-button="update-flow"]');
+        return clickButton.click({ force: true });
+    },
+    clickPageRevertToDraft: async function (driver) {
+        let clickButton = await driver.$('[data-test-button="revert-to-draft"]');
+        return clickButton.click({ force: true });
+    },
     clickNewPageCloseModal: async function (driver) {
         let clickButton = await driver.$('[data-test-button="close-publish-flow"]');
         return clickButton.click({ force: true });
