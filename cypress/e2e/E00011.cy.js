@@ -15,7 +15,7 @@ describe('Test feature pages', () => {
         doLogIn();
     });
 
-    it("Escenario: Create new page", () => {
+    it("Escenario 011: Create new page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.get(CONTENT.newPageButton).click(); //Click on New Page
         cy.location("hash").should("contain", "#/editor/page"); // check location

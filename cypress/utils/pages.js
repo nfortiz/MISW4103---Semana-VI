@@ -23,7 +23,8 @@ export const CONTENT = {
     confirmCreationPageButton: 'span[data-test-task-button-state="idle"]',
     editPageButton: 'span.gh-post-list-cta.edit',
     updatePageButton: 'button.gh-btn-editor',
-    goToPagesButton: 'a[data-test-link="pages"]'
+    goToPagesButton: 'a[data-test-link="pages"]',
+    unpublishPageButton: 'button[data-test-button="update-flow"]'
 }
 
 export function addContentToPage(title, content) {
