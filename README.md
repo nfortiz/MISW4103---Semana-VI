@@ -25,11 +25,13 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 ### Ejecución en Cypress
 - **Instalación de Cypress:** Cypress se instala con el comando `npm install cypress --save-dev`. Una vez instalado, puedes verificar la versión con `cypress --version`, la cual debe ser `13.5.2` para asegurar la compatibilidad con este repositorio.
   
-- **Configuración de credenciales:** En la ruta `cypress/fixtures/`, se encuentra el archivo `properties.json`, donde es necesario reemplazar los valores de `email` y `password` con tus credenciales para ejecutar las pruebas correctamente.
+- **Configuración de credenciales:** En la ruta `cypress/fixtures/`, se encuentra el archivo `properties.json`, donde es necesario reemplazar los valores de `email` y `password` con las credenciales para ejecutar las pruebas correctamente.
   
 - **Ejecución de pruebas:** Para iniciar las pruebas, primero abre una terminal y ejecuta `npx cypress open`, lo que lanzará la interfaz de Cypress. Crea un nuevo proyecto apuntando al directorio donde clonaste el repositorio. Dentro de la carpeta e2e encontrarás 20 archivos, cada uno identificado con el código `E000XXX`, que representa un escenario específico de prueba. Para ejecutar las pruebas, haz clic en cada archivo `E000XXX.cy.js`. Se recomienda ejecutarlos uno por uno para un mejor control de los resultados.
 
 ### Ejecución Kraken
 - **Instalación de Kraken:** Para instalar Kraken, utiliza el comando `npm install kraken-node`. Después de la instalación, es importante verificar que todos los prerequisitos necesarios estén cumplidos. Ejecuta el comando `npx kraken-node doctor` para confirmar que todos los componentes requeridos están instalados. Si algún prerequisito falta, se debe instalar antes de ejecutar las pruebas.
 
-- **Ejecución Kraken:** En primera instancia, se debe ingresar a la carpeta de Kraken. Para ello, desde la terminal se debe correr el comando `cd kraken`. Luego, en la ruta `kraken\features\features`
+- **Configuración de credenciales:** En la ruta `kraken\features\web\properties.json`, se encuentra el archivo `properties.json`, donde es necesario reemplazar los valores de `email` y `password` con las credenciales para ejecutar las pruebas correctamente.
+
+- **Ejecución Kraken:** En primera instancia, se debe ingresar a la carpeta de Kraken. Para ello, desde la terminal se debe correr el comando `cd kraken`. Luego, en la ruta `kraken\features\features` se encuentran las 20 escenarios de pruebas con el código E000XXX.feature. Para poder correr las pruebas es necesario ir copiando cada escenario, es decir, tomar cada E000XXX.feature y pegar su contenido en el archivo `features\ghost.feature` y luego ejecutar la prueba con el comando `npx kraken-node run`.
