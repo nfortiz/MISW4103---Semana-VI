@@ -1,4 +1,4 @@
-import { doLogIn } from "../utils/pages";
+import { doLogIn, CONTENT } from "../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
@@ -12,23 +12,23 @@ describe('Test feature pages', () => {
 
     it("Escenario: Create new page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
-        cy.get('a[data-test-new-page-button=""]').click(); //Click on New Page
+        cy.get(CONTENT.newPageButton).click(); //Click on New Page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         cy.intercept("PUT", "/ghost/api/admin/pages/*", {}).as("createPage");
 
         // Set content
-        cy.get('textarea[data-test-editor-title-input=""]').type("A New Page by Cypress")
-        cy.get('p[data-koenig-dnd-droppable="true"]').first().type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
+        cy.get(CONTENT.pageTitleInput).type("A New Page by Cypress")
+        cy.get(CONTENT.pageContentInput).first().type(" To live is to risk it all, otherwise you’re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you.")
 
         cy.wait(1000)
 
-        cy.get('button[data-test-button="publish-flow"]').first().click(); // click en publicar
+        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
 
         cy.wait(500)
-        cy.get('div.epm-modal-container').within(() => {
-            cy.get('button[data-test-button="continue"]').first().click() // click en continuar
-            cy.get('span[data-test-task-button-state="idle"]').first().click(); //click en confirmar
+        cy.get(CONTENT.newPageModal).within(() => {
+            cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
+            cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
         })
 
         cy.wait(500)
