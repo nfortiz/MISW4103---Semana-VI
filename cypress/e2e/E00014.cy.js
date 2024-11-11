@@ -1,7 +1,6 @@
 import {    
     CONTENT, 
-    doLogIn,
-    addContentToPage
+    doLogIn
 } from "../utils/pages";
 const BASE_URL = "http://localhost:2368";
 

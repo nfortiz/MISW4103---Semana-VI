@@ -1,4 +1,7 @@
-import { doLogIn } from "../utils/util";
+import {    
+    CONTENT, 
+    doLogIn
+} from "../utils/pages";
 const BASE_URL = "http://localhost:2368";
 
 describe('Test feature pages', () => {
@@ -14,7 +17,7 @@ describe('Test feature pages', () => {
     it("Escenario: Delete page", () => {
         cy.visit(BASE_URL + '/ghost/#/pages/')
         cy.screenshot('Before Delete');
-        cy.get('span.gh-post-list-cta.edit').first().click(); //Click on Edit first page
+        cy.get(CONTENT.editPageButton).first().click(); //Click on Edit first page
         cy.location("hash").should("contain", "#/editor/page"); // check location
 
         cy.get('button.settings-menu-toggle').first().click(); // click en menu lateral
