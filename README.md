@@ -24,7 +24,7 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 
 ### Instalacion de Ghost
 Primero: Instalar Ghost-CLI 
-`npm instala fantasma-cli@latest -g`
+`npm install ghost-cli@latest -g`
 
 Luego, en su terminal, acceda a un directorio vacío y ejecute el comando de instalación:
 `ghost install local`
