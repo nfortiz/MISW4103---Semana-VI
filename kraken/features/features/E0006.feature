@@ -2,8 +2,8 @@ Feature: Ghost
 
 @user6 @web
 Scenario: E0006 - Crear un tag con nombre y descripción
-  Given I navigate to page "http://localhost:2368/ghost/#/signin"
-  When I enter email "d.andrades@uniandes.edu.co" password "ArpolisVI204*"
+  Given I navigate to page principal
+  When I enter email y password
   And I wait for 1 seconds
   Then I clic to Sign in
   Then Página principal del administrador

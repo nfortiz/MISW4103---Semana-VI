@@ -45,15 +45,23 @@ const {
   clickPages
 } = require("../pages/principal");
 
-const { Given, When, Then } = require('@cucumber/cucumber');
+const fs = require('fs'); // Asegúrate de requerir 'fs' al principio del archivo
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
+
+let properties;
+Before(() => {
+  const data = fs.readFileSync('./features/web/properties.json', 'utf8');
+  properties = JSON.parse(data);
+});
+
+Given('I navigate to page principal', async function () {
+    await this.driver.url(properties.Url);
+});
 
 //Seccion login
-When(
-  "I enter email {string} password {string}",
-  async function (email, password) {
-    await logIn(this.driver, email, password);
-  }
-);
+When('I enter email y password', async function () {
+    await logIn(this.driver, properties.Email, properties.Password);
+});
 
 Then("I clic to Sign in", async function () {
   await logInButton(this.driver);

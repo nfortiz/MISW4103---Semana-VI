@@ -2,8 +2,8 @@ Feature: Ghost
 
 @user2 @web
 Scenario: E012 - Crear una page vacia. sin contenido.
-  Given I navigate to page "http://localhost:2368/ghost/#/signin"
-  When I enter email "d.andrades@uniandes.edu.co" password "ArpolisVI204*"
+  Given I navigate to page principal
+  When I enter email y password
   And I wait for 1 seconds
   Then I clic to Sign in
   Then Página principal del administrador
