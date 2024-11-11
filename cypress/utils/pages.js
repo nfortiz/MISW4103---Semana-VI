@@ -22,3 +22,15 @@ export const CONTENT = {
     continueCreationPageButton: 'button[data-test-button="continue"]',
     confirmCreationPageButton: 'span[data-test-task-button-state="idle"]'
 }
+
+export function addContentToPage(title, content) {
+    cy.get(CONTENT.pageTitleInput).type(title)
+    cy.get(CONTENT.pageContentInput).first().type(content)
+}
+
+export function confirmCreatePage() {
+    cy.get(CONTENT.newPageModal).within(() => {
+        cy.get(CONTENT.continueCreationPageButton).first().click() // click en continuar
+        cy.get(CONTENT.confirmCreationPageButton).first().click(); //click en confirmar
+    })
+}
