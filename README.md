@@ -22,6 +22,15 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 ### Instalación de dependencias:
 - Las dependencias del proyecto están definidas en los archivos package.json y package-lock.json. Para instalarlas, primero se debe ejecutar `npm install` para descargar e instalar todas las dependencias especificadas.
 
+### Instalacion de Ghost
+Primero: Instalar Ghost-CLI 
+`npm instala fantasma-cli@latest -g`
+
+Luego, en su terminal, acceda a un directorio vacío y ejecute el comando de instalación:
+`ghost install local`
+
+Una vez finalizada la instalación, dirigase a  `http://localhost:2368/ghost` para acceder a Ghost Admin.
+
 ### Ejecución en Cypress
 - **Instalación de Cypress:** Cypress se instala con el comando `npm install cypress --save-dev`. Una vez instalado, puedes verificar la versión con `cypress --version`, la cual debe ser `13.5.2` para asegurar la compatibilidad con este repositorio.
   
