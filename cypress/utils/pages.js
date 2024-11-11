@@ -20,7 +20,10 @@ export const CONTENT = {
     publishPageButton: 'button[data-test-button="publish-flow"]',
     newPageModal: 'div.epm-modal-container',
     continueCreationPageButton: 'button[data-test-button="continue"]',
-    confirmCreationPageButton: 'span[data-test-task-button-state="idle"]'
+    confirmCreationPageButton: 'span[data-test-task-button-state="idle"]',
+    editPageButton: 'span.gh-post-list-cta.edit',
+    updatePageButton: 'button.gh-btn-editor',
+    goToPagesButton: 'a[data-test-link="pages"]'
 }
 
 export function addContentToPage(title, content) {
