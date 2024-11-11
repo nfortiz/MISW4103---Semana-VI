@@ -18,9 +18,10 @@ A través del comando git clone, se debe clonar el repositorio a un directorio l
 - **Condiciones iniciales para ejecutar pruebas en Ghost:** Las pruebas deben ejecutarse en la versión de Ghost especificada y se enfocan en las funcionalidades principales de la ABP (Posts, Pages, Tags, Members). Para evitar interferencias en los resultados, se recomienda que estas secciones estén vacías y sin contenido en drafts, ya que elementos existentes pueden afectar la ejecución correcta de las pruebas. Aplica para Cypress como a Kraken.
 - **Manejo de errores iniciales en Cypress y Kraken:** Al ejecutar las pruebas por primera vez, Cypress y Kraken pueden presentar errores inesperados, como problemas para cargar Ghost a tiempo. Si las dos primeras ejecuciones fallan, se recomienda reintentarlas, ya que en la mayoría de los casos, las pruebas logran completarse exitosamente después de estos dos intentos.
 
-### Instalación de dependencias
-- Las dependencias del proyectos se encuentran en el archivo package-lock.json y package.json, para poder instalarlas se debe correr el comando `npm init -y` para incializar un proyecto y luego el comando `npm install` para instalar las dependencias.
+### Instalación de dependencias:
+- Las dependencias del proyecto están definidas en los archivos package.json y package-lock.json. Para instalarlas, primero se debe inicializar el proyecto ejecutando el comando `npm init -y`, y luego usar `npm install` para descargar e instalar todas las dependencias especificadas.
 
-### Ejecucion de Karaken
-- Entrar a la carpeta Kraken
-- Ejecutar el comando `npm run k:run`
+### Ejecución en Cypress
+- **Instalación de Cypress:** Cypress se instala con el comando `npm install cypress --save-dev`. Una vez instalado, puedes verificar la versión con `cypress --version`, la cual debe ser `13.5.2` para asegurar la compatibilidad con este repositorio.
+- **Configuración de credenciales:** En la ruta `cypress/fixtures/`, se encuentra el archivo `properties.json`, donde es necesario reemplazar los valores de `email` y `password` con tus credenciales para ejecutar las pruebas correctamente.
+- **Ejecución de pruebas:** Para iniciar las pruebas, primero abre una terminal y ejecuta `npx cypress open`, lo que lanzará la interfaz de Cypress. Crea un nuevo proyecto apuntando al directorio donde clonaste el repositorio. Dentro de la carpeta e2e encontrarás 20 archivos, cada uno identificado con el código `E000XXX`, que representa un escenario específico de prueba. Para ejecutar las pruebas, haz clic en cada archivo `E000XXX.cy.js`. Se recomienda ejecutarlos uno por uno para un mejor control de los resultados.
