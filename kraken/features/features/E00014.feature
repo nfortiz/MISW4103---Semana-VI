@@ -9,7 +9,7 @@ Scenario: E00014 - Actualizar el estado de la page previamente creada a unpublis
   Then Página principal del administrador
   Then Click en la sección de Pages
   Then Página de listado de Pages
-  When Clic en el boton New Page
+  When Click en el boton New Page
   Then Titulo del Page
   Then Clic en Contenido page
   Then Contenido del Page
